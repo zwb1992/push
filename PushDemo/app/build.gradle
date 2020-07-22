@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.huawei.agconnect'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.zwb.pushdemo"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME   : "123",
+                JPUSH_APPKEY    : "124",
+                JPUSH_CHANNEL   : "developer-default",
+                XIAOMI_APPID    : "123",
+                XIAOMI_APPKEY   : "123",
+                OPPO_APPSECRET  : "123", // OPPO推送appSecret
+                OPPO_APPKEY     : "123", // OPPO推送appKey
+                VIVO_APPID      : "123", // VIVO推送 appId
+                VIVO_APPKEY     : "123", // VIVO推送 appKey
+                VIVO_APPSECRET  : "123", // VIVO推送 appSecret
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+            dirs '../pushlibrary/libs', 'libs'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation project(path: ':pushlibrary')
+}
