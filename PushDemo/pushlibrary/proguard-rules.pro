@@ -39,3 +39,15 @@
 -keep class com.vivo.push.**{*;   }
 -keep class com.vivo.vms.**{*; }
 -keep class com.zwb.pushlibrary.platform.vivo.VivoPushMessageReceiver{*;}
+
+#可以防止一个误报的 warning 导致无法成功编译，如果编译使用的 Android 版本是 23。
+-dontwarn com.xiaomi.push.**
+-keep class com.zwb.pushlibrary.platform.mipush.MiPushMessageReceiver{*;}
+-keep class com.xiaomi.push.**{*; }
+
+-dontoptimize
+-dontpreverify
+
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+-keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
